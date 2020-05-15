@@ -96,7 +96,7 @@ private:
 	{
 		if (enableValidationLayers)
 		{
-			//DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
+			DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
 		}
 		vkDestroyInstance(instance, nullptr);
 		glfwDestroyWindow(window);
@@ -167,14 +167,15 @@ private:
 			VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
 			VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
 			VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
-		//|
-		//VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT; // TODO: remove
+
+		//createInfo.messageSeverity |= VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT; // TODO: remove
+		
 		createInfo.messageType =
 			VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
-			VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+			VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
 			VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 		createInfo.pfnUserCallback = debugCallback;
-		//createInfo.pUserData = this; // Optional
+		createInfo.pUserData = this; // Optional
 	}
 
 	void setupDebugMessenger()
